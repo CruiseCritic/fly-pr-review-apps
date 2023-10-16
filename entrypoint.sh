@@ -30,6 +30,10 @@ vm_memory="${INPUT_VM_MEMORY:-${FLY_VM_MEMORY:-256}}"
 wait_timeout="${INPUT_WAIT_TIMEOUT:-120}"
 ha="${INPUT_HA:-${FLY_HA:-false}}"
 
+doppler_config="$INPUT_DOPPLER_CONFIG"
+doppler_project="$INPUT_DOPPLER_PROJECT"
+
+DOPPLER_TOKEN="$INPUT_DOPPLER_TOKEN"
 
 if ! echo "$app" | grep "$PR_NUMBER"; then
   echo "For safety, this action requires the app's name to contain the PR number."
@@ -60,8 +64,10 @@ if ! flyctl status --app "$app"; then
     rm fly.toml
   fi
 
-  if [ -n "$INPUT_SECRETS" ]; then
-    echo $INPUT_SECRETS | sed 's/ \([A-Z]\)/\n\1/g' | flyctl secrets import --app "$app"
+  if [ -n "$doppler_config" ] && [ -n "$doppler_project" ] && [ -n "$DOPPLER_TOKEN" ]; then
+    doppler secrets download --no-file --format env-no-quotes -c "$doppler_config" -p "$doppler_project" | sed 's/\\n/ /g' | flyctl secrets import -a "$app"
+  elif [ -n "$INPUT_SECRETS" ]; then
+    echo "$INPUT_SECRETS" | sed 's/ \([A-Z]\)/\n\1/g' | flyctl secrets import --app "$app"
   fi
 
   # Attach postgres cluster to the app if specified.
