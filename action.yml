@@ -1,4 +1,4 @@
-name: "PR Review Apps on fly.io [fork of a fork of the original superfly action]"
+name: "PR Build Apps on fly.io"
 description: "Deploy temporary apps from pull requests on Fly.io"
 author: cruisecritic
 branding:
