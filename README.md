@@ -60,7 +60,7 @@ jobs:
 
       - name: Deploy
         id: deploy
-        uses: cruisecritic/fly-pr-review-apps@1.0.0
+        uses: CruiseCritic/fly-pr-review-apps@1.0.0
 ```
 
 ## Cleaning up GitHub environments
@@ -88,7 +88,7 @@ jobs:
 
       - name: Deploy app
         id: deploy
-        uses: cruisecritic/fly-pr-review-apps@1.0.0
+        uses: CruiseCritic/fly-pr-review-apps@1.0.0
 
       - name: Clean up GitHub environment
         uses: strumwolf/delete-deployment-environment@v2
@@ -112,7 +112,7 @@ steps:
 
   - name: Deploy app
     id: deploy
-    uses: cruisecritic/fly-pr-review-apps@1.0.0
+    uses: CruiseCritic/fly-pr-review-apps@1.0.0
     with:
       postgres: myapp-postgres-staging-apps
 ```
@@ -128,7 +128,7 @@ steps:
   - uses: actions/checkout@v2
 
   - name: Deploy redis
-    uses: cruisecritic/fly-pr-review-apps@1.0.0
+    uses: CruiseCritic/fly-pr-review-apps@1.0.0
     with:
       update: false # Don't need to re-deploy redis when the PR is updated
       path: redis # Keep fly.toml in a subdirectory to avoid confusing flyctl
@@ -137,7 +137,7 @@ steps:
 
   - name: Deploy app
     id: deploy
-    uses: cruisecritic/fly-pr-review-apps@1.0.0
+    uses: CruiseCritic/fly-pr-review-apps@1.0.0
     with:
       name: pr-${{ github.event.number }}-myapp-app
 ```
