@@ -1,6 +1,6 @@
 name: "PR Review Apps on fly.io [fork of a fork of the original superfly action]"
 description: "Deploy temporary apps from pull requests on Fly.io"
-author: gnakic
+author: cruisecritic
 branding:
   icon: "upload-cloud"
   color: "purple"
@@ -39,3 +39,9 @@ inputs:
     description: Seconds to wait for individual machines to transition states and become healthy. Default `120`
   ha:
     description: Create spare machines that increases app availability. Default `false`
+  doppler_token:
+    description: Doppler authentication token
+  doppler_project:
+    description: Doppler project for build secrets import
+  doppler_config:
+    description: Doppler config for build secrets import
