@@ -75,9 +75,9 @@ if ! flyctl status --app "$app"; then
     flyctl postgres attach --app "$app" "$INPUT_POSTGRES" || true
   fi
 
-  flyctl deploy --config "$config" --dockerfile "$dockerfile" $build_arg --app "$app" --region "$region" --image "$image" --vm-size "$vm_size" --vm-memory "$vm_memory" --strategy immediate --ha=$ha --wait-timeout "$wait_timeout"
+  flyctl deploy --config "$config" --dockerfile "$dockerfile" $build_arg --app "$app" --regions "$region" --image "$image" --vm-size "$vm_size" --vm-memory "$vm_memory" --strategy immediate --ha=$ha --wait-timeout "$wait_timeout"
 elif [ "$INPUT_UPDATE" != "false" ]; then
-  flyctl deploy --config "$config" --dockerfile "$dockerfile" $build_arg --app "$app" --region "$region" --image "$image" --vm-size "$vm_size" --vm-memory "$vm_memory" --strategy immediate --ha=$ha --wait-timeout "$wait_timeout"
+  flyctl deploy --config "$config" --dockerfile "$dockerfile" $build_arg --app "$app" --regions "$region" --image "$image" --vm-size "$vm_size" --vm-memory "$vm_memory" --strategy immediate --ha=$ha --wait-timeout "$wait_timeout"
 fi
 
 # Make some info available to the GitHub workflow.
